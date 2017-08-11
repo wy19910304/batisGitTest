@@ -24,7 +24,7 @@ public class MainController {
 	
 	// 使用spring的依赖注入(DI)
 	// 可以使用Resource和Autowired注解
-	@Resource
+	@Resource(name="msgMapper")
 	private MessageMapper messageMapper;
 	
 	@Resource
@@ -33,18 +33,16 @@ public class MainController {
 	@RequestMapping(value="/")
 	public String frontPage(){
 		
-		PageInfo<Message> pageInfo = messageService.queryByPage(1, 2);
-		
-		System.out.println(pageInfo);
-		
-		
 		return "messageBoard";
 	}
 	
 	@RequestMapping(value="/findall")
 	@ResponseBody
 	public List<Message> findAllMsg(){
-		List<Message> messages = messageMapper.findAllMessages();
+		
+		PageInfo<Message> pageInfo = messageService.queryByPage(1, 2);
+		
+		List<Message> messages = pageInfo.getList();
 		return messages;
 	}
 	

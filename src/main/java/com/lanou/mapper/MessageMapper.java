@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.lanou.bean.Message;
 
 // 配置dao层注解, 用于对controller的依赖注入
-@Repository
+@Repository("msgMapper")
 public interface MessageMapper {
 	
 	// 添加一个新方法, 用来查询所有的消息
